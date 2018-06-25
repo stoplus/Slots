@@ -1,11 +1,15 @@
 package com.example.slots.ui;
 
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.example.slots.MyApp;
 import com.example.slots.R;
 import com.example.slots.entityRoom.UserDao;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -23,5 +27,6 @@ UserDao userDao;
         setContentView(R.layout.activity_main);
 
         MyApp.app().appComponent().inject(this);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }
