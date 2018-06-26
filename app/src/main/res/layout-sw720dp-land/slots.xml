@@ -14,7 +14,7 @@
         <include
             layout="@layout/slot"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="30dp"
             android:layout_marginStart="30dp"
@@ -24,7 +24,7 @@
         <include
             layout="@layout/slot"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="30dp"
             android:layout_weight="1" />
@@ -32,7 +32,7 @@
         <include
             layout="@layout/slot"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="30dp"
             android:layout_marginEnd="30dp"

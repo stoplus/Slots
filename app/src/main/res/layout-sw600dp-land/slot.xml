@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/itemSlot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="15dp"
-    app:contentPadding="7dp">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/spiner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/spinner" />
+
+    <ImageView
+        android:id="@+id/combination_1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:contentDescription="@string/combination_1"
+        app:layout_constraintBottom_toTopOf="@+id/combination_2"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/spinner"
+        app:srcCompat="@drawable/combination_1" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/combination_2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:contentDescription="@string/combination_2"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/spinner"
+        app:srcCompat="@drawable/combination_2" />
 
-        <ImageView
-            android:id="@+id/combination_1"
-            android:layout_width="120dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/button_small_minus"
-            app:srcCompat="@drawable/combination_1" />
-
-        <ImageView
-            android:id="@+id/combination_2"
-            android:layout_width="120dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/button_small_minus"
-            app:srcCompat="@drawable/combination_3" />
-
-        <ImageView
-            android:id="@+id/combination_3"
-            android:layout_width="120dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/button_small_minus"
-            app:srcCompat="@drawable/combination_2" />
-
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+    <ImageView
+        android:id="@+id/combination_3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/combination_2"
+        app:srcCompat="@drawable/combination_3" />
+</android.support.constraint.ConstraintLayout>
