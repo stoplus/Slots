@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Slots</string>
+    <string name="background">background</string>
+    <string name="splash_picture">splash_picture</string>
+    <string name="board_jackpot">board_jackpot</string>
+    <string name="field_jackpot">field_jackpot</string>
+    <string name="text_jackpot">text_jackpot</string>
+    <string name="board_combinations">board_combinations</string>
+    <string name="logo">logo</string>
+    <string name="spinner_shape">spinner_shape</string>
+    <string name="coins_picture">coins_picture</string>
+    <string name="button_blue_small">button_blue_small</string>
+    <string name="field_coins">field_coins</string>
+    <string name="field_lines">field_lines</string>
+    <string name="field_bet">field_bet</string>
+    <string name="button_big">button_big</string>
+    <string name="button_small_plus">button_small_plus</string>
+    <string name="button_small_minus">button_small_minus</string>
+    <string name="combination_1">combination_1</string>
+    <string name="combination_2">combination_2</string>
+    <string name="combination_3">combination_3</string>
+    <string name="combination_4">combination_4</string>
+    <string name="combination_5">combination_5</string>
+    <string name="combination_6">combination_6</string>
+    <string name="combination_7">combination_7</string>
+
 </resources>

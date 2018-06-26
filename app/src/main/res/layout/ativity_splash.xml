@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@mipmap/background" />
+        app:srcCompat="@mipmap/background"
+        android:contentDescription="@string/background" />
 
     <ImageView
         android:id="@+id/splash_picture"
@@ -24,6 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/splashBackground"
-        app:srcCompat="@mipmap/splash_picture" />
+        app:srcCompat="@mipmap/splash_picture"
+        android:contentDescription="@string/splash_picture" />
 </android.support.constraint.ConstraintLayout>
 

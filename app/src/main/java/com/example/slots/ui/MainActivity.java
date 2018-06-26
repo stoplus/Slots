@@ -1,9 +1,12 @@
 package com.example.slots.ui;
 
+import android.graphics.Typeface;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.slots.MyApp;
 import com.example.slots.R;
@@ -28,5 +31,9 @@ UserDao userDao;
 
         MyApp.app().appComponent().inject(this);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        final TextView firstEditText = findViewById(R.id.textViewCombinations);
+        firstEditText.setTypeface(Typeface.createFromAsset(
+                getAssets(), "Sextan-Bold-FFP.ttf"));
     }
 }
