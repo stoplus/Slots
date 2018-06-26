@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context=".ui.MainActivity">
 
     <ImageView
@@ -17,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/background" />
+        app:srcCompat="@drawable/background" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                app:srcCompat="@mipmap/text_jackpot" />
+                app:srcCompat="@drawable/text_jackpot" />
 
 
             <ImageView
@@ -57,7 +56,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_jackpot"
-                app:srcCompat="@mipmap/field_jackpot" />
+                app:srcCompat="@drawable/field_jackpot" />
 
             <ImageView
                 android:id="@+id/board_jackpot"
@@ -68,7 +67,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/field_jackpot"
-                app:srcCompat="@mipmap/board_jackpot" />
+                app:srcCompat="@drawable/board_jackpot" />
         </LinearLayout>
 
         <RelativeLayout
@@ -85,7 +84,7 @@
                 android:contentDescription="@string/logo"
                 android:gravity="center"
                 android:paddingTop="10dp"
-                app:srcCompat="@mipmap/logo" />
+                app:srcCompat="@drawable/logo" />
 
             <include
                 layout="@layout/slots"
@@ -111,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="COMBINATIONS"
+                android:text="@string/combinations"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
@@ -124,7 +123,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCombinations"
-                app:srcCompat="@mipmap/board_combinations" />
+                app:srcCompat="@drawable/board_combinations" />
 
         </LinearLayout>
     </LinearLayout>
@@ -149,7 +148,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/button_blue_small" />
+            app:srcCompat="@drawable/button_blue_small" />
 
 
         <android.support.constraint.ConstraintLayout
@@ -175,7 +174,7 @@
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/field_coins" />
+                app:srcCompat="@drawable/field_coins" />
 
             <ImageView
                 android:id="@+id/coins_picture"
@@ -189,7 +188,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/field_coins"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/coins_picture" />
+                app:srcCompat="@drawable/coins_picture" />
         </android.support.constraint.ConstraintLayout>
 
 
@@ -204,7 +203,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/constraintLayoutBlock2"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/field_lines" />
+            app:srcCompat="@drawable/field_lines" />
 
 
         <android.support.constraint.ConstraintLayout
@@ -226,7 +225,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/field_bet" />
+                app:srcCompat="@drawable/field_bet" />
 
             <ImageView
                 android:id="@+id/button_small_plus"
@@ -237,7 +236,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/field_bet"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/button_small" />
+                app:srcCompat="@drawable/button_small" />
 
             <ImageView
                 android:id="@+id/button_small_minus"
@@ -248,7 +247,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/field_bet"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/button_small" />
+                app:srcCompat="@drawable/button_small" />
         </android.support.constraint.ConstraintLayout>
 
 
@@ -264,7 +263,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/block"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/button_big" />
+            app:srcCompat="@drawable/button_big" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

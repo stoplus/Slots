@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,5 +36,8 @@ UserDao userDao;
         final TextView firstEditText = findViewById(R.id.textViewCombinations);
         firstEditText.setTypeface(Typeface.createFromAsset(
                 getAssets(), "Sextan-Bold-FFP.ttf"));
+    }
+
+    public void btnSpin(View view) {
     }
 }

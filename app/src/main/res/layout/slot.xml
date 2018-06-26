@@ -22,7 +22,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:contentDescription="@string/button_small_minus"
-            app:srcCompat="@mipmap/combination_1" />
+            app:srcCompat="@drawable/combination_1" />
 
         <ImageView
             android:id="@+id/combination_2"
@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:contentDescription="@string/button_small_minus"
-            app:srcCompat="@mipmap/combination_3" />
+            app:srcCompat="@drawable/combination_3" />
 
         <ImageView
             android:id="@+id/combination_3"
@@ -43,7 +43,7 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:contentDescription="@string/button_small_minus"
-            app:srcCompat="@mipmap/combination_2" />
+            app:srcCompat="@drawable/combination_2" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
