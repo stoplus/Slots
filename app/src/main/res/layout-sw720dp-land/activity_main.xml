@@ -85,14 +85,15 @@
                 android:gravity="center"
                 android:paddingTop="70dp"
                 app:srcCompat="@mipmap/logo" />
-
-            <ImageView
-                android:id="@+id/spinner_shape"
+            
+            <include
+                layout="@layout/slots"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/spinner_shape"
-                android:gravity="center"
-                app:srcCompat="@mipmap/spinner_shape" />
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="100dp"
+                android:contentDescription="@string/spinner_shape" />
 
         </RelativeLayout>
 
@@ -111,7 +112,7 @@
                 android:gravity="center"
                 android:text="COMBINATIONS"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="30sp" />
 
             <ImageView
                 android:id="@+id/board_combinations"

@@ -66,7 +66,6 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -74,22 +73,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/logo"
-                android:gravity="center"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
                 android:paddingTop="20dp"
                 app:srcCompat="@mipmap/logo" />
 
-            <ImageView
-                android:id="@+id/spinner_shape"
+            <include
+                layout="@layout/slots"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="@string/spinner_shape"
-                android:gravity="center"
-                android:paddingBottom="20dp"
-                app:srcCompat="@mipmap/spinner_shape"  />
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="65dp"
+                android:contentDescription="@string/spinner_shape" />
 
         </RelativeLayout>
 
