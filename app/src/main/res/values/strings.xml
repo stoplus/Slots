@@ -26,5 +26,10 @@
     <string name="combinations">COMBINATIONS</string>
     <string name="spin">SPIN!</string>
     <string name="spiner">spiner</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="bet">BET</string>
+    <string name="lines">LINES</string>
+    <string name="my_coins">MY COINS</string>
 
 </resources>
