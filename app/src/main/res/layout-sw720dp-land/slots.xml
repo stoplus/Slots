@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,40 +9,178 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <include
-        android:id="@+id/include2"
-        layout="@layout/slot"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/itemSlot2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        app:layout_constraintEnd_toStartOf="@+id/include"
+        app:layout_constraintEnd_toStartOf="@+id/itemSlot3"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/itemSlot1"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/slot"
+        <ImageView
+            android:id="@+id/spinner2"
+            android:layout_width="140dp"
+            android:layout_height="390dp"
+            android:contentDescription="@string/spiner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/spinner" />
+
+        <ImageView
+            android:id="@+id/slot_combination_4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/combination_1"
+            app:layout_constraintBottom_toTopOf="@+id/slot_combination_5"
+            app:layout_constraintEnd_toEndOf="@+id/spinner2"
+            app:layout_constraintStart_toStartOf="@+id/spinner2"
+            app:layout_constraintTop_toTopOf="@+id/spinner2"
+            app:srcCompat="@drawable/combination_1" />
+
+
+        <ImageView
+            android:id="@+id/slot_combination_5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/combination_2"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner2"
+            app:layout_constraintEnd_toEndOf="@+id/spinner2"
+            app:layout_constraintStart_toStartOf="@+id/spinner2"
+            app:layout_constraintTop_toTopOf="@+id/spinner2"
+            app:srcCompat="@drawable/combination_2" />
+
+        <ImageView
+            android:id="@+id/slot_combination_6"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner2"
+            app:layout_constraintEnd_toEndOf="@+id/spinner2"
+            app:layout_constraintStart_toStartOf="@+id/spinner2"
+            app:layout_constraintTop_toBottomOf="@+id/slot_combination_5"
+            app:srcCompat="@drawable/combination_3" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/itemSlot1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toStartOf="@+id/include3"
+        app:layout_constraintEnd_toStartOf="@+id/itemSlot2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/include2" />
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <include
-        android:id="@+id/include3"
-        layout="@layout/slot"
+        <ImageView
+            android:id="@+id/spinner1"
+            android:layout_width="140dp"
+            android:layout_height="390dp"
+            android:contentDescription="@string/spiner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/spinner" />
+
+        <ImageView
+            android:id="@+id/slot_combination_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/combination_1"
+            app:layout_constraintBottom_toTopOf="@+id/slot_combination_2"
+            app:layout_constraintEnd_toEndOf="@+id/spinner1"
+            app:layout_constraintStart_toStartOf="@+id/spinner1"
+            app:layout_constraintTop_toTopOf="@+id/spinner1"
+            app:srcCompat="@drawable/combination_1" />
+
+
+        <ImageView
+            android:id="@+id/slot_combination_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/combination_2"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner1"
+            app:layout_constraintEnd_toEndOf="@+id/spinner1"
+            app:layout_constraintStart_toStartOf="@+id/spinner1"
+            app:layout_constraintTop_toTopOf="@+id/spinner1"
+            app:srcCompat="@drawable/combination_2" />
+
+        <ImageView
+            android:id="@+id/slot_combination_3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner1"
+            app:layout_constraintEnd_toEndOf="@+id/spinner1"
+            app:layout_constraintStart_toStartOf="@+id/spinner1"
+            app:layout_constraintTop_toBottomOf="@+id/slot_combination_2"
+            app:srcCompat="@drawable/combination_3" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/itemSlot3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/include" />
+        app:layout_constraintStart_toEndOf="@+id/itemSlot2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/spinner3"
+            android:layout_width="140dp"
+            android:layout_height="390dp"
+            android:contentDescription="@string/spiner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/spinner" />
+
+        <ImageView
+            android:id="@+id/slot_combination_7"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/combination_1"
+            app:layout_constraintBottom_toTopOf="@+id/slot_combination_8"
+            app:layout_constraintEnd_toEndOf="@+id/spinner3"
+            app:layout_constraintStart_toStartOf="@+id/spinner3"
+            app:layout_constraintTop_toTopOf="@+id/spinner3"
+            app:srcCompat="@drawable/combination_1" />
+
+        <ImageView
+            android:id="@+id/slot_combination_8"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/combination_2"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner3"
+            app:layout_constraintEnd_toEndOf="@+id/spinner3"
+            app:layout_constraintStart_toStartOf="@+id/spinner3"
+            app:layout_constraintTop_toTopOf="@+id/spinner3"
+            app:srcCompat="@drawable/combination_2" />
+
+        <ImageView
+            android:id="@+id/slot_combination_9"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner3"
+            app:layout_constraintEnd_toEndOf="@+id/spinner3"
+            app:layout_constraintStart_toStartOf="@+id/spinner3"
+            app:layout_constraintTop_toBottomOf="@+id/slot_combination_8"
+            app:srcCompat="@drawable/combination_3" />
+    </android.support.constraint.ConstraintLayout>
 
     <View
+        android:id="@+id/view2"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="@android:color/holo_green_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
-        app:layout_constraintEnd_toEndOf="@+id/include3"
-        app:layout_constraintStart_toStartOf="@+id/include2"
-        app:layout_constraintTop_toTopOf="@+id/include" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/itemSlot1"
+        app:layout_constraintEnd_toEndOf="@+id/itemSlot3"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

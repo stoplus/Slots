@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.example.slots.database.MyDatabase;
-import com.example.slots.entityRoom.UserDao;
+import com.example.slots.entityRoom.GameDataDao;
 
 import javax.inject.Singleton;
 
@@ -36,8 +36,8 @@ public class DatabaseModule {
 //    }
 
     @Singleton @Provides
-    public UserDao provideUserDao(MyDatabase myDatabase){
-        return myDatabase.userDao();
+    public GameDataDao provideUserDao(MyDatabase myDatabase){
+        return myDatabase.gameDataDao();
     }
 
 //    @Singleton @Provides

@@ -7,17 +7,17 @@ import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.RoomDatabase;
 import android.support.annotation.NonNull;
 
-import com.example.slots.entityRoom.User;
-import com.example.slots.entityRoom.UserDao;
+import com.example.slots.entityRoom.GameData;
+import com.example.slots.entityRoom.GameDataDao;
 
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
-//@Database(entities = {Card.class, History.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {GameData.class}, version = 1, exportSchema = false)
+//@Database(entities = {Card.class, History.class, GameData.class}, version = 1, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
 //    public abstract CardDao cardDao();
 //    public abstract HistoryDao historyDao();
-    public abstract UserDao userDao();
+    public abstract GameDataDao gameDataDao();
 
     @NonNull
     @Override

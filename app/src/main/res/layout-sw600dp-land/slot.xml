@@ -17,11 +17,11 @@
         app:srcCompat="@drawable/spinner" />
 
     <ImageView
-        android:id="@+id/combination_1"
+        android:id="@+id/slot_combination_1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/combination_1"
-        app:layout_constraintBottom_toTopOf="@+id/combination_2"
+        app:layout_constraintBottom_toTopOf="@+id/slot_combination_2"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="@+id/spinner"
         app:layout_constraintTop_toTopOf="@+id/spinner"
@@ -29,7 +29,7 @@
 
 
     <ImageView
-        android:id="@+id/combination_2"
+        android:id="@+id/slot_combination_2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/combination_2"
@@ -40,12 +40,12 @@
         app:srcCompat="@drawable/combination_2" />
 
     <ImageView
-        android:id="@+id/combination_3"
+        android:id="@+id/slot_combination_3"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/combination_2"
+        app:layout_constraintTop_toBottomOf="@+id/slot_combination_2"
         app:srcCompat="@drawable/combination_3" />
 </android.support.constraint.ConstraintLayout>

@@ -31,5 +31,7 @@
     <string name="bet">BET</string>
     <string name="lines">LINES</string>
     <string name="my_coins">MY COINS</string>
+    <string name="start_bet">5</string>
+    <string name="jackpot_sum">100000</string>
 
 </resources>

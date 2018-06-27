@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:paddingTop="5dp"
-                    android:text="2,500,000"
+                    android:text="@string/jackpot_sum"
                     android:textColor="@android:color/white"
                     android:textSize="25sp" />
             </RelativeLayout>
@@ -156,7 +156,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/btn_settings"
-            android:onClick="button_blue_small"
+            android:onClick="btnSettings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayoutBlock2"
             app:layout_constraintHorizontal_bias="0.5"
@@ -310,7 +310,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="100"
+                    android:text="@string/start_bet"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
@@ -331,7 +331,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="80dp"
                 android:background="@drawable/btn_smal"
-                android:onClick="button_small_plus"
+                android:onClick="btnPlus"
                 android:text="@string/plus"
                 android:textColor="@android:color/black"
                 android:textSize="25sp"
@@ -346,7 +346,7 @@
                 android:layout_height="42dp"
                 android:layout_marginEnd="80dp"
                 android:background="@drawable/btn_smal"
-                android:onClick="button_small_minus"
+                android:onClick="btnMinus"
                 android:text="@string/minus"
                 android:textColor="@android:color/black"
                 android:textSize="27sp"
