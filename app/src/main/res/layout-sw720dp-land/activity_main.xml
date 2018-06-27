@@ -82,16 +82,16 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/logo"
                 android:gravity="center"
-                android:paddingTop="70dp"
+                android:paddingTop="80dp"
                 app:srcCompat="@drawable/logo" />
 
             <include
                 layout="@layout/slots"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/logo"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="150dp"
+                android:layout_marginBottom="120dp"
                 android:contentDescription="@string/spinner_shape" />
 
         </RelativeLayout>

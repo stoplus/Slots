@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="350dp"
         android:contentDescription="@string/spiner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/combination_1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@string/combination_1"
         app:layout_constraintBottom_toTopOf="@+id/combination_2"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/combination_2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@string/combination_2"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
@@ -41,8 +41,8 @@
 
     <ImageView
         android:id="@+id/combination_3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="@+id/spinner"
