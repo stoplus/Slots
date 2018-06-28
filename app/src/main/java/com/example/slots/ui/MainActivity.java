@@ -3,20 +3,25 @@ package com.example.slots.ui;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSmoothScroller;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.slots.MyApp;
 import com.example.slots.R;
+import com.example.slots.adapters.Adapter;
 import com.example.slots.entityRoom.GameData;
 import com.example.slots.entityRoom.GameDataDao;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +29,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,25 +38,6 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
     @Inject
     GameDataDao gameDataDao;
-
-    @BindView(R.id.slot_combination_1)
-    ImageView comb1;
-    @BindView(R.id.slot_combination_2)
-    ImageView comb2;
-    @BindView(R.id.slot_combination_3)
-    ImageView comb3;
-    @BindView(R.id.slot_combination_4)
-    ImageView comb4;
-    @BindView(R.id.slot_combination_5)
-    ImageView comb5;
-    @BindView(R.id.slot_combination_6)
-    ImageView comb6;
-    @BindView(R.id.slot_combination_7)
-    ImageView comb7;
-    @BindView(R.id.slot_combination_8)
-    ImageView comb8;
-    @BindView(R.id.slot_combination_9)
-    ImageView comb9;
 
     @BindView(R.id.textViewCombinations)
     TextView textViewCombinations;
@@ -75,7 +60,19 @@ public class MainActivity extends AppCompatActivity {
     private Disposable disposable;
     private int[] combinationsIdImage = {R.drawable.combination_1, R.drawable.combination_2, R.drawable.combination_3,
             R.drawable.combination_4, R.drawable.combination_5, R.drawable.combination_6, R.drawable.combination_7};
-    private ImageView[] combinationsImageViewId;
+    private int idAccount;
+    private RecyclerView recyclerView;
+    private RecyclerView recyclerView2;
+    private RecyclerView recyclerView3;
+    private final int SIZE = 20;
+    private List<Integer> tempList = new ArrayList<>();
+    private List<Integer> tempList2 = new ArrayList<>();
+    private List<Integer> tempList3 = new ArrayList<>();
+    private boolean flag = false;
+    private List<Integer> items = new ArrayList<>();
+    private List<Integer> items2 = new ArrayList<>();
+    private List<Integer> items3 = new ArrayList<>();
+    private int count = 0;
 
 
     @Override
@@ -86,14 +83,124 @@ public class MainActivity extends AppCompatActivity {
 
         MyApp.app().appComponent().inject(this);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setupSpinners();
 
-        combinationsImageViewId = new ImageView[]{comb1, comb2, comb3, comb4, comb5, comb6, comb7, comb8, comb9};
         setFonts();
-        getListUserData();
+        getListAllAccounts();
     }//onCreate
 
 
-    public void getListUserData() {
+    private void setupSpinners() {
+        recyclerView = findViewById(R.id.recycler1);
+        recyclerView2 = findViewById(R.id.recycler2);
+        recyclerView3 = findViewById(R.id.recycler3);
+
+        recyclerView.addOnItemTouchListener(listener);
+        recyclerView2.addOnItemTouchListener(listener);
+        recyclerView3.addOnItemTouchListener(listener);
+
+        items = createLists(tempList);
+        items2 = createLists(tempList2);
+        items3 = createLists(tempList3);
+        count = 0;
+
+        recyclerView.setAdapter(Adapter.newInstance(this, items));
+        recyclerView2.setAdapter(Adapter.newInstance(this, items2));
+        recyclerView3.setAdapter(Adapter.newInstance(this, items3));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView3.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }//setupSpinners
+
+
+    private RecyclerView.OnItemTouchListener listener = new RecyclerView.OnItemTouchListener() {
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+//                return e.getAction() == MotionEvent.ACTION_MOVE;
+            return true;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+    };
+
+
+    private List<Integer> createLists(List<Integer> tempListForSize) {
+        List<Integer> list = new ArrayList<>();
+        count++;
+        if (tempListForSize.size() == 0) {//если первый раз запускали
+            for (int i = 0; i < SIZE; i++) {
+                int pos = addList(i);
+                list.add(pos);//добавляем случайное id картинки
+            }
+        } else {//если не первый раз запускаем
+            switch (count) {
+                case 1:
+                    items.clear();
+                    list.addAll(tempList);
+                    tempList.clear();
+                    break;
+                case 2:
+                    items2.clear();
+                    list.addAll(tempList2);
+                    tempList2.clear();
+                    break;
+                case 3:
+                    items3.clear();
+                    list.addAll(tempList3);
+                    tempList3.clear();
+                    break;
+            }
+            for (int i = 3; i < SIZE; i++) {
+
+                int pos = addList(i);
+                switch (count) {
+                    case 1:
+                        list.add(pos);//добавляем случайное id картинки
+                        break;
+                    case 2:
+                        list.add(pos);//добавляем случайное id картинки
+                        break;
+                    case 3:
+                        list.add(pos);//добавляем случайное id картинки
+                        break;
+                }//switch
+            }//for
+        }//if
+        flag = false;
+        return list;
+    }//createList
+
+    private int addList(int size) {
+        int position = getRandom();
+        //копируем последние три элемента
+        if (size == SIZE - 3)
+            flag = true;
+        if (flag) {
+            switch (count) {
+                case 1:
+                    tempList.add(combinationsIdImage[position]);
+                    break;
+                case 2:
+                    tempList2.add(combinationsIdImage[position]);
+                    break;
+                case 3:
+                    tempList3.add(combinationsIdImage[position]);
+                    break;
+            }
+        }
+        return combinationsIdImage[position];
+    }//addList
+
+
+    public void getListAllAccounts() {
         disposable = gameDataDao.getListAccounts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -103,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                         betField.setText(String.valueOf(listAccounts.get(0).getBet()));
                         jackpotField.setText(String.valueOf(listAccounts.get(0).getJackpot()));
                         coinsField.setText(String.valueOf(listAccounts.get(0).getCoins()));
+                        idAccount = listAccounts.get(0).getId();
                     } else {
                         int bet = Integer.parseInt(betField.getText().toString());
                         int jackpot = Integer.parseInt(jackpotField.getText().toString());
@@ -125,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {//Вставляем новую
-                        getListUserData();
+                        getListAllAccounts();
                     }//onComplete
 
                     @Override
@@ -147,7 +255,29 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {
-                        getListUserData();
+                        getListAllAccounts();
+                    }//onComplete
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                });
+    }//updateImageObj
+
+
+    private void updateBetAccount(int bet, int id) {
+        Completable.fromAction(() -> gameDataDao.updateBet(bet, id))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers
+                        .mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        getListAllAccounts();
                     }//onComplete
 
                     @Override
@@ -158,41 +288,69 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void btnSpin(View view) {
-        MyTask mt = new MyTask();
-        mt.execute();
-    }
+        items = createLists(tempList);
+        items2 = createLists(tempList2);
+        items3 = createLists(tempList3);
+        count = 0;
 
+        recyclerView.setAdapter(Adapter.newInstance(this, items));
+        recyclerView2.setAdapter(Adapter.newInstance(this, items2));
+        recyclerView3.setAdapter(Adapter.newInstance(this, items3));
 
-    class MyTask extends AsyncTask<Void, Integer, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                for (int i = 20; i > 0; i--) {
-                    TimeUnit.MILLISECONDS.sleep(25);
-                    publishProgress();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                LinearSmoothScroller smoothScroller = new LinearSmoothScroller(MainActivity.this) {
+
+                    private static final float SPEED = 70f;// Change this value (default=25f)
+
+                    @Override
+                    protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                        return SPEED / displayMetrics.densityDpi;
+                    }
+                };
+                smoothScroller.setTargetPosition(position);
+                startSmoothScroll(smoothScroller);
             }
-            return null;
-        }//doInBackground
+        };
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                LinearSmoothScroller smoothScroller = new LinearSmoothScroller(MainActivity.this) {
 
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            setImage();
-        }//onProgressUpdate
-    }//class MyTask
+                    private static final float SPEED = 70f;// Change this value (default=25f)
 
+                    @Override
+                    protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                        return SPEED / displayMetrics.densityDpi;
+                    }
+                };
+                smoothScroller.setTargetPosition(position);
+                startSmoothScroll(smoothScroller);
+            }
+        };
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                LinearSmoothScroller smoothScroller = new LinearSmoothScroller(MainActivity.this) {
 
-    private void setImage() {
-        //вставляем случайные комбинации в ячейки спинеров
-        for (int i = 0; i < combinationsImageViewId.length; i++) {
-            int position = getRandom();
-            int idImage = combinationsIdImage[position];//
-            ImageView image = combinationsImageViewId[i];
-            image.setImageResource(idImage);
-        }
+                    private static final float SPEED = 70f;// Change this value (default=25f)
+
+                    @Override
+                    protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                        return SPEED / displayMetrics.densityDpi;
+                    }
+                };
+                smoothScroller.setTargetPosition(position);
+                startSmoothScroll(smoothScroller);
+            }
+        };
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView2.setLayoutManager(layoutManager2);
+        recyclerView3.setLayoutManager(layoutManager3);
+        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
+        recyclerView2.smoothScrollToPosition(recyclerView2.getAdapter().getItemCount());
+        recyclerView3.smoothScrollToPosition(recyclerView3.getAdapter().getItemCount());
     }
 
 
@@ -206,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
         int bet = Integer.parseInt(betField.getText().toString());
         if (bet > 5) {
             bet -= 5;
-            betField.setText(String.valueOf(bet));
+            updateBetAccount(bet, idAccount);
         }
     }
 
@@ -214,9 +372,10 @@ public class MainActivity extends AppCompatActivity {
         int bet = Integer.parseInt(betField.getText().toString());
         if (bet < 100) {
             bet += 5;
-            betField.setText(String.valueOf(bet));
+            updateBetAccount(bet, idAccount);
         }
     }
+
 
     public void btnSettings(View view) {
     }

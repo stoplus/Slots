@@ -34,4 +34,7 @@
     <string name="start_bet">5</string>
     <string name="jackpot_sum">100000</string>
 
+    <string name="item_string">Item %1$d</string>
+    <string name="slot">slot</string>
+
 </resources>
