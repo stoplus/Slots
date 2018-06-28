@@ -1,7 +1,6 @@
 package com.example.slots.ui;
 
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.slots.MyApp;
@@ -23,7 +21,6 @@ import com.example.slots.entityRoom.GameDataDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -73,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> items2 = new ArrayList<>();
     private List<Integer> items3 = new ArrayList<>();
     private int count = 0;
+    private static final float SPEED = 70f;// Change this value (default=25f)
 
 
     @Override
@@ -301,9 +299,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
                 LinearSmoothScroller smoothScroller = new LinearSmoothScroller(MainActivity.this) {
-
-                    private static final float SPEED = 70f;// Change this value (default=25f)
-
                     @Override
                     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
                         return SPEED / displayMetrics.densityDpi;
@@ -317,9 +312,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
                 LinearSmoothScroller smoothScroller = new LinearSmoothScroller(MainActivity.this) {
-
-                    private static final float SPEED = 70f;// Change this value (default=25f)
-
                     @Override
                     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
                         return SPEED / displayMetrics.densityDpi;
@@ -333,9 +325,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
                 LinearSmoothScroller smoothScroller = new LinearSmoothScroller(MainActivity.this) {
-
-                    private static final float SPEED = 70f;// Change this value (default=25f)
-
                     @Override
                     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
                         return SPEED / displayMetrics.densityDpi;

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,9 +8,9 @@
         android:id="@+id/splashBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/background"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/background"
-        android:contentDescription="@string/background" />
+        app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/splash_picture"
@@ -21,11 +20,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/splash_picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/splashBackground"
-        app:srcCompat="@drawable/splash_picture"
-        android:contentDescription="@string/splash_picture" />
+        app:srcCompat="@drawable/splash_picture" />
 </android.support.constraint.ConstraintLayout>
 

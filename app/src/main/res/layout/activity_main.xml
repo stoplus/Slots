@@ -251,9 +251,9 @@
                 android:id="@+id/field_lines1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:contentDescription="@string/field_lines"
-                app:srcCompat="@drawable/field_lines"
-                android:layout_centerInParent="true"/>
+                app:srcCompat="@drawable/field_lines" />
 
             <TextView
                 android:id="@+id/textView_field_lines"
@@ -269,8 +269,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/lines"
                 android:paddingTop="50dp"
+                android:text="@string/lines"
                 android:textColor="@android:color/white"
                 android:textSize="9sp" />
         </RelativeLayout>
@@ -301,9 +301,9 @@
                     android:id="@+id/field_bet1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:contentDescription="@string/field_bet"
-                    app:srcCompat="@drawable/field_bet"
-                    android:layout_centerInParent="true"/>
+                    app:srcCompat="@drawable/field_bet" />
 
                 <TextView
                     android:id="@+id/textView_field_bet"
