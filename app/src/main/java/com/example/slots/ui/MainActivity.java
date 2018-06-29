@@ -1,16 +1,21 @@
 package com.example.slots.ui;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.slots.MyApp;
@@ -75,12 +80,16 @@ public class MainActivity extends AppCompatActivity {
     private int count = 0;
     private static final float SPEED = 70f;// Change this value (default=25f)
     private GameData gameDataTemp;
+    private View view;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        view = getLayoutInflater().inflate(R.layout.activity_main, null);
+        setContentView(view);
+
         ButterKnife.bind(this);
 
         MyApp.app().appComponent().inject(this);
@@ -355,44 +364,56 @@ public class MainActivity extends AppCompatActivity {
         int bet = Integer.parseInt(betField.getText().toString());
         int jackpot = Integer.parseInt(jackpotField.getText().toString());
         int myCoins = Integer.parseInt(coinsField.getText().toString());
+        int win_summ = 0;
 
         if (tempList.get(1).equals(tempList2.get(1)) && tempList.get(1).equals(tempList3.get(1))) {
             switch (tempList2.get(1)) {
                 case R.drawable.combination_1:
-                    myCoins += bet * 10;
+                    win_summ = bet * 10;
+                    myCoins += win_summ;
                     break;
                 case R.drawable.combination_2:
-                    myCoins += bet * 15;
+                    win_summ = bet * 15;
+                    myCoins += win_summ;
                     break;
                 case R.drawable.combination_3:
-                    myCoins += bet * 25;
+                    win_summ = bet * 25;
+                    myCoins += win_summ;
                     break;
                 case R.drawable.combination_4:
-                    myCoins += bet * 35;
+                    win_summ = bet * 35;
+                    myCoins += win_summ;
                     break;
                 case R.drawable.combination_5:
-                    myCoins += bet * 50;
+                    win_summ = bet * 50;
+                    myCoins += win_summ;
                     break;
                 case R.drawable.combination_6:
-                    myCoins += bet * 75;
+                    win_summ = bet * 75;
+                    myCoins += win_summ;
                     break;
                 case R.drawable.combination_7:
-                    myCoins += bet + jackpot;
+                    win_summ = jackpot;
+                    myCoins += win_summ;
                     jackpot = 0;
                     break;
             }//switch
+            startWinDialog(win_summ);
         } else if (tempList.get(1).equals(R.drawable.combination_7) &&
                 tempList2.get(1).equals(R.drawable.combination_7) ||
                 tempList.get(1).equals(R.drawable.combination_7) &&
                         tempList3.get(1).equals(R.drawable.combination_7) ||
                 tempList2.get(1).equals(R.drawable.combination_7) &&
                         tempList3.get(1).equals(R.drawable.combination_7)) {
-            myCoins += bet * 50;
-
+            win_summ = bet * 50;
+            myCoins += win_summ;
+            startWinDialog(win_summ);
         } else if (tempList.get(1).equals(R.drawable.combination_7) ||
                 tempList2.get(1).equals(R.drawable.combination_7) ||
                 tempList3.get(1).equals(R.drawable.combination_7)) {
-            myCoins += bet * 25;
+            win_summ = bet * 25;
+            myCoins += win_summ;
+            startWinDialog(win_summ);
         }else {
             myCoins -= bet;
             jackpot += bet;
@@ -409,6 +430,39 @@ public class MainActivity extends AppCompatActivity {
         }, 1700);
     }//checkWin
 
+
+    private void startWinDialog(int win_summ){
+
+        Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+// Get the Snackbar's layout view
+        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
+// Hide the text
+        TextView textView = (TextView) layout.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setVisibility(View.INVISIBLE);
+
+// Inflate our custom view
+//        View snackView = mInflater.inflate(R.layout.my_snackbar, null);
+        View snackView= LayoutInflater.from(this).inflate(R.layout.win_dialig, null, false);
+
+// Configure the view
+       TextView summ = snackView.findViewById(R.id.win_summ);
+        String sum = String.valueOf(win_summ);
+        summ.setText(sum);
+
+//        ImageView imageView = (ImageView) snackView.findViewById(R.id.image);
+//        imageView.setImageBitmap(image);
+//        TextView textViewTop = (TextView) snackView.findViewById(R.id.text);
+//        textViewTop.setText(text);
+//        textViewTop.setTextColor(Color.WHITE);
+
+//If the view is not covering the whole snackbar layout, add this line
+        layout.setPadding(0,0,0,0);
+        layout.setBackgroundColor(Color.TRANSPARENT);
+// Add the view to the Snackbar's layout
+        layout.addView(snackView, 0);
+// Show the Snackbar
+        snackbar.show();
+    }
 
     private int getRandom() {
         Random rand = new Random();
