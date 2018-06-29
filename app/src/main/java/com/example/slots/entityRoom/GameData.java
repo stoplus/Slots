@@ -24,6 +24,7 @@ public class GameData {
         this.bet = bet;
     }//GameData
 
+
     public int getCoins() {
         return coins;
     }

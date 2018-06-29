@@ -2,6 +2,7 @@ package com.example.slots.ui;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     GameDataDao gameDataDao;
 
+    //description
     @BindView(R.id.textViewCombinations)
     TextView textViewCombinations;
     @BindView(R.id.coins_descript)
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.field_bet_descript)
     TextView fieldBetDescript;
 
+    //set fields
     @BindView(R.id.textView_jackpot)
     TextView jackpotField;
     @BindView(R.id.textView_coins)
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> items3 = new ArrayList<>();
     private int count = 0;
     private static final float SPEED = 70f;// Change this value (default=25f)
+    private GameData gameDataTemp;
 
 
     @Override
@@ -205,11 +209,14 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(listAccounts -> {
                     disposable.dispose();
                     if (listAccounts.size() > 0) {
+                        //заполняем поля из данных аккаунта
                         betField.setText(String.valueOf(listAccounts.get(0).getBet()));
                         jackpotField.setText(String.valueOf(listAccounts.get(0).getJackpot()));
                         coinsField.setText(String.valueOf(listAccounts.get(0).getCoins()));
                         idAccount = listAccounts.get(0).getId();
+                        gameDataTemp = listAccounts.get(0);
                     } else {
+                        //добавляем новый аккаунт, если аккаунт не создан
                         int bet = Integer.parseInt(betField.getText().toString());
                         int jackpot = Integer.parseInt(jackpotField.getText().toString());
                         int myCoins = Integer.parseInt(coinsField.getText().toString());
@@ -340,7 +347,67 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
         recyclerView2.smoothScrollToPosition(recyclerView2.getAdapter().getItemCount());
         recyclerView3.smoothScrollToPosition(recyclerView3.getAdapter().getItemCount());
+//        GameData newGameData = WinningCombinations.newInstance(items, items2, items3);
+        checkWin();
     }
+
+    private void checkWin() {
+        int bet = Integer.parseInt(betField.getText().toString());
+        int jackpot = Integer.parseInt(jackpotField.getText().toString());
+        int myCoins = Integer.parseInt(coinsField.getText().toString());
+
+        if (tempList.get(1).equals(tempList2.get(1)) && tempList.get(1).equals(tempList3.get(1))) {
+            switch (tempList2.get(1)) {
+                case R.drawable.combination_1:
+                    myCoins += bet * 10;
+                    break;
+                case R.drawable.combination_2:
+                    myCoins += bet * 15;
+                    break;
+                case R.drawable.combination_3:
+                    myCoins += bet * 25;
+                    break;
+                case R.drawable.combination_4:
+                    myCoins += bet * 35;
+                    break;
+                case R.drawable.combination_5:
+                    myCoins += bet * 50;
+                    break;
+                case R.drawable.combination_6:
+                    myCoins += bet * 75;
+                    break;
+                case R.drawable.combination_7:
+                    myCoins += bet + jackpot;
+                    jackpot = 0;
+                    break;
+            }//switch
+        } else if (tempList.get(1).equals(R.drawable.combination_7) &&
+                tempList2.get(1).equals(R.drawable.combination_7) ||
+                tempList.get(1).equals(R.drawable.combination_7) &&
+                        tempList3.get(1).equals(R.drawable.combination_7) ||
+                tempList2.get(1).equals(R.drawable.combination_7) &&
+                        tempList3.get(1).equals(R.drawable.combination_7)) {
+            myCoins += bet * 50;
+
+        } else if (tempList.get(1).equals(R.drawable.combination_7) ||
+                tempList2.get(1).equals(R.drawable.combination_7) ||
+                tempList3.get(1).equals(R.drawable.combination_7)) {
+            myCoins += bet * 25;
+        }else {
+            myCoins -= bet;
+            jackpot += bet;
+        }
+        gameDataTemp.setBet(bet);
+        gameDataTemp.setCoins(myCoins);
+        gameDataTemp.setJackpot(jackpot);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDB(gameDataTemp);
+            }
+        }, 1700);
+    }//checkWin
 
 
     private int getRandom() {
@@ -355,7 +422,7 @@ public class MainActivity extends AppCompatActivity {
             bet -= 5;
             updateBetAccount(bet, idAccount);
         }
-    }
+    }//btnMinus
 
     public void btnPlus(View view) {
         int bet = Integer.parseInt(betField.getText().toString());
@@ -363,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
             bet += 5;
             updateBetAccount(bet, idAccount);
         }
-    }
+    }//btnPlus
 
 
     public void btnSettings(View view) {

@@ -329,25 +329,33 @@
                     android:textSize="12sp" />
             </RelativeLayout>
 
-            <ImageView
+            <Button
                 android:id="@+id/button_small_plus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="145dp"
-                android:contentDescription="@string/button_small_plus"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="145dp"
+                android:background="@drawable/btn_smal"
+                android:onClick="btnPlus"
+                android:text="@string/plus"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/field_bet"
+                app:layout_constraintStart_toStartOf="@+id/field_bet"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/button_small" />
 
-            <ImageView
+            <Button
                 android:id="@+id/button_small_minus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="145dp"
-                android:contentDescription="@string/button_small_minus"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginEnd="145dp"
+                android:background="@drawable/btn_smal"
+                android:onClick="btnMinus"
+                android:text="@string/minus"
+                android:textColor="@android:color/black"
+                android:textSize="45sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/field_bet"
+                app:layout_constraintEnd_toEndOf="@+id/field_bet"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/button_small" />
         </android.support.constraint.ConstraintLayout>
