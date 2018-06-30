@@ -1,21 +1,23 @@
 package com.example.slots.ui;
 
+import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.slots.MyApp;
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.textView_field_bet)
     TextView betField;
 
+    @BindView(R.id.button_big)
+    Button btnSpin;
+
     private Disposable disposable;
     private int[] combinationsIdImage = {R.drawable.combination_1, R.drawable.combination_2, R.drawable.combination_3,
             R.drawable.combination_4, R.drawable.combination_5, R.drawable.combination_6, R.drawable.combination_7};
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView2;
     private RecyclerView recyclerView3;
-    private final int SIZE = 20;
+    private final int SIZE = 20;//количество элементов в каждом спинере
     private List<Integer> tempList = new ArrayList<>();
     private List<Integer> tempList2 = new ArrayList<>();
     private List<Integer> tempList3 = new ArrayList<>();
@@ -78,9 +83,15 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> items2 = new ArrayList<>();
     private List<Integer> items3 = new ArrayList<>();
     private int count = 0;
-    private static final float SPEED = 70f;// Change this value (default=25f)
+    private static final float SPEED = 70f;// Speed sclol spiners (default=25f)
     private GameData gameDataTemp;
     private View view;
+    private Snackbar snackbar;
+    private TextView summ;
+    private int win_summ = 0;
+    BaseTransientBottomBar.ContentViewCallback ff;
+    private int countLine;
+    private int myCoins;
 
 
     @Override
@@ -98,7 +109,48 @@ public class MainActivity extends AppCompatActivity {
 
         setFonts();
         getListAllAccounts();
+        setupSnackBar();
     }//onCreate
+
+
+    private void setupSnackBar() {
+        snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+        View snackView = getLayoutInflater().inflate(R.layout.win_snack_bar, null);
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        summ = snackView.findViewById(R.id.win_summ);
+        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
+        layout.setBackgroundColor(Color.TRANSPARENT);
+        snackBarView.addView(snackView, 0);
+        snackbar.setDuration(800);
+
+        // запускаем анимацию для компонента listView
+        ff = new BaseTransientBottomBar.ContentViewCallback() {
+            @Override
+            public void animateContentIn(int delay, int duration) {//вверх
+                ViewCompat.setAlpha(snackView, 0f);
+                ViewCompat.animate(snackView)
+                        .withLayer()
+                        .alphaBy(1f)
+                        .setDuration(duration)
+                        .setStartDelay(delay);
+            }//animateContentIn
+
+            @Override
+            public void animateContentOut(int delay, int duration) {//вниз
+            }
+        };
+        snackbar.addCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                btnSpin.setClickable(true);
+            }
+
+            @Override
+            public void onShown(Snackbar snackbar) {
+            }
+        });
+        snackbar.isShown();
+    }//setupSnackBar
 
 
     private void setupSpinners() {
@@ -127,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.OnItemTouchListener listener = new RecyclerView.OnItemTouchListener() {
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-//                return e.getAction() == MotionEvent.ACTION_MOVE;
             return true;
         }
 
@@ -168,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                     list.addAll(tempList3);
                     tempList3.clear();
                     break;
-            }
+            }//switch
             for (int i = 3; i < SIZE; i++) {
 
                 int pos = addList(i);
@@ -205,8 +256,8 @@ public class MainActivity extends AppCompatActivity {
                 case 3:
                     tempList3.add(combinationsIdImage[position]);
                     break;
-            }
-        }
+            }//switch
+        }//if
         return combinationsIdImage[position];
     }//addList
 
@@ -222,8 +273,17 @@ public class MainActivity extends AppCompatActivity {
                         betField.setText(String.valueOf(listAccounts.get(0).getBet()));
                         jackpotField.setText(String.valueOf(listAccounts.get(0).getJackpot()));
                         coinsField.setText(String.valueOf(listAccounts.get(0).getCoins()));
+                        textViewFieldLines.setText(String.valueOf(countLine));
                         idAccount = listAccounts.get(0).getId();
                         gameDataTemp = listAccounts.get(0);
+                        if (win_summ > 0) {
+                            summ.setText(String.valueOf(win_summ));
+                            ff.animateContentIn(0, 400);//вверх
+                            snackbar.show();
+                            win_summ = 0;
+                        } else {
+                            btnSpin.setClickable(true);
+                        }
                     } else {
                         //добавляем новый аккаунт, если аккаунт не создан
                         int bet = Integer.parseInt(betField.getText().toString());
@@ -247,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {//Вставляем новую
+                        win_summ = 0;
                         getListAllAccounts();
                     }//onComplete
 
@@ -291,6 +352,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {
+                        win_summ = 0;
                         getListAllAccounts();
                     }//onComplete
 
@@ -356,113 +418,172 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
         recyclerView2.smoothScrollToPosition(recyclerView2.getAdapter().getItemCount());
         recyclerView3.smoothScrollToPosition(recyclerView3.getAdapter().getItemCount());
-//        GameData newGameData = WinningCombinations.newInstance(items, items2, items3);
         checkWin();
-    }
+    }//btnSpin
+
 
     private void checkWin() {
-        int bet = Integer.parseInt(betField.getText().toString());
-        int jackpot = Integer.parseInt(jackpotField.getText().toString());
-        int myCoins = Integer.parseInt(coinsField.getText().toString());
-        int win_summ = 0;
-
-        if (tempList.get(1).equals(tempList2.get(1)) && tempList.get(1).equals(tempList3.get(1))) {
-            switch (tempList2.get(1)) {
-                case R.drawable.combination_1:
-                    win_summ = bet * 10;
-                    myCoins += win_summ;
-                    break;
-                case R.drawable.combination_2:
-                    win_summ = bet * 15;
-                    myCoins += win_summ;
-                    break;
-                case R.drawable.combination_3:
-                    win_summ = bet * 25;
-                    myCoins += win_summ;
-                    break;
-                case R.drawable.combination_4:
-                    win_summ = bet * 35;
-                    myCoins += win_summ;
-                    break;
-                case R.drawable.combination_5:
-                    win_summ = bet * 50;
-                    myCoins += win_summ;
-                    break;
-                case R.drawable.combination_6:
-                    win_summ = bet * 75;
-                    myCoins += win_summ;
-                    break;
-                case R.drawable.combination_7:
-                    win_summ = jackpot;
-                    myCoins += win_summ;
-                    jackpot = 0;
-                    break;
-            }//switch
-            startWinDialog(win_summ);
-        } else if (tempList.get(1).equals(R.drawable.combination_7) &&
-                tempList2.get(1).equals(R.drawable.combination_7) ||
-                tempList.get(1).equals(R.drawable.combination_7) &&
-                        tempList3.get(1).equals(R.drawable.combination_7) ||
-                tempList2.get(1).equals(R.drawable.combination_7) &&
-                        tempList3.get(1).equals(R.drawable.combination_7)) {
-            win_summ = bet * 50;
-            myCoins += win_summ;
-            startWinDialog(win_summ);
-        } else if (tempList.get(1).equals(R.drawable.combination_7) ||
-                tempList2.get(1).equals(R.drawable.combination_7) ||
-                tempList3.get(1).equals(R.drawable.combination_7)) {
-            win_summ = bet * 25;
-            myCoins += win_summ;
-            startWinDialog(win_summ);
-        }else {
-            myCoins -= bet;
-            jackpot += bet;
+//        btnSpin.setClickable(false);
+//        int bet = Integer.parseInt(betField.getText().toString());
+//        int jackpot = Integer.parseInt(jackpotField.getText().toString());
+//        int myCoins = Integer.parseInt(coinsField.getText().toString());
+//        boolean checkOtherLineFlag = false;
+//
+//        if (tempList.get(1).equals(tempList2.get(1)) && tempList.get(1).equals(tempList3.get(1))) {
+//            switch (tempList2.get(1)) {
+//                case R.drawable.combination_1:
+//                    win_summ = bet * 10;
+//                    myCoins += win_summ;
+//                    break;
+//                case R.drawable.combination_2:
+//                    win_summ = bet * 15;
+//                    myCoins += win_summ;
+//                    break;
+//                case R.drawable.combination_3:
+//                    win_summ = bet * 25;
+//                    myCoins += win_summ;
+//                    break;
+//                case R.drawable.combination_4:
+//                    win_summ = bet * 35;
+//                    myCoins += win_summ;
+//                    break;
+//                case R.drawable.combination_5:
+//                    win_summ = bet * 50;
+//                    myCoins += win_summ;
+//                    break;
+//                case R.drawable.combination_6:
+//                    win_summ = bet * 75;
+//                    myCoins += win_summ;
+//                    break;
+//                case R.drawable.combination_7:
+//                    win_summ = jackpot;
+//                    myCoins += win_summ;
+//                    jackpot = 0;
+//                    break;
+//            }//switch
+//            checkOtherLineFlag = true;
+//        } else if (tempList.get(1).equals(R.drawable.combination_7) &&
+//                tempList2.get(1).equals(R.drawable.combination_7) ||
+//                tempList.get(1).equals(R.drawable.combination_7) &&
+//                        tempList3.get(1).equals(R.drawable.combination_7) ||
+//                tempList2.get(1).equals(R.drawable.combination_7) &&
+//                        tempList3.get(1).equals(R.drawable.combination_7)) {
+//            win_summ = bet * 50;
+//            myCoins += win_summ;
+//            checkOtherLineFlag = true;
+//        } else if (tempList.get(1).equals(R.drawable.combination_7) ||
+//                tempList2.get(1).equals(R.drawable.combination_7) ||
+//                tempList3.get(1).equals(R.drawable.combination_7)) {
+//            win_summ = bet * 25;
+//            myCoins += win_summ;
+//            checkOtherLineFlag = true;
+//        } else {
+//            myCoins -= bet;
+//            jackpot += bet;
+//        }
+        countLine = 0;
+        myCoins = Integer.parseInt(coinsField.getText().toString());
+        boolean checkOtherLineFlag = checkLine(true, 1, 1, 1);
+        if (checkOtherLineFlag) {
+            countLine++;
+            if (checkLine(false, 0, 0, 0)) {
+                countLine++;
+            }
+            if (checkLine(false, 2, 2, 2)) {
+                countLine++;
+            }
+            if (checkLine(false, 0, 1, 2)) {
+                countLine++;
+            }
+            if (checkLine(false, 2, 1, 0)) {
+                countLine++;
+            }
         }
-        gameDataTemp.setBet(bet);
-        gameDataTemp.setCoins(myCoins);
-        gameDataTemp.setJackpot(jackpot);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateDB(gameDataTemp);
             }
-        }, 1700);
+        }, 1000);
     }//checkWin
 
+    private boolean checkLine(boolean isFirstLine, int comb1, int comb2, int comb3) {
+        btnSpin.setClickable(false);
+        int bet = Integer.parseInt(betField.getText().toString());
+        int jackpot = Integer.parseInt(jackpotField.getText().toString());
 
-    private void startWinDialog(int win_summ){
+        boolean checkOtherLineFlag = false;
+        int winSummTemp = 0;
+        int myCoinsTemp = 0;
 
-        Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
-// Get the Snackbar's layout view
-        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
-// Hide the text
-        TextView textView = (TextView) layout.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setVisibility(View.INVISIBLE);
+        if (tempList.get(comb1).equals(tempList2.get(comb2)) && tempList.get(comb1).equals(tempList3.get(comb3))) {
+            switch (tempList2.get(1)) {
+                case R.drawable.combination_1:
+                    winSummTemp = bet * 10;
+                    myCoinsTemp += winSummTemp;
+                    break;
+                case R.drawable.combination_2:
+                    winSummTemp = bet * 15;
+                    myCoinsTemp += winSummTemp;
+                    break;
+                case R.drawable.combination_3:
+                    winSummTemp = bet * 25;
+                    myCoinsTemp += winSummTemp;
+                    break;
+                case R.drawable.combination_4:
+                    winSummTemp = bet * 35;
+                    myCoinsTemp += winSummTemp;
+                    break;
+                case R.drawable.combination_5:
+                    winSummTemp = bet * 50;
+                    myCoinsTemp += winSummTemp;
+                    break;
+                case R.drawable.combination_6:
+                    winSummTemp = bet * 75;
+                    myCoinsTemp += winSummTemp;
+                    break;
+                case R.drawable.combination_7:
+                    if (isFirstLine) {
+                        winSummTemp = jackpot;
+                        myCoinsTemp += winSummTemp;
+                        jackpot = 0;
+                    }
+                    break;
+            }//switch
+            checkOtherLineFlag = true;
+        } else if ((tempList.get(1).equals(R.drawable.combination_7) &&
+                tempList2.get(1).equals(R.drawable.combination_7) ||
+                tempList.get(1).equals(R.drawable.combination_7) &&
+                        tempList3.get(1).equals(R.drawable.combination_7) ||
+                tempList2.get(1).equals(R.drawable.combination_7) &&
+                        tempList3.get(1).equals(R.drawable.combination_7)) && isFirstLine) {
+            winSummTemp = bet * 50;
+            myCoinsTemp += winSummTemp;
+            checkOtherLineFlag = true;
+        } else if ((tempList.get(1).equals(R.drawable.combination_7) ||
+                tempList2.get(1).equals(R.drawable.combination_7) ||
+                tempList3.get(1).equals(R.drawable.combination_7)) && isFirstLine) {
+            winSummTemp = bet * 25;
+            myCoinsTemp += winSummTemp;
+            checkOtherLineFlag = true;
+        } else {
+            if (isFirstLine){
+                myCoins -= bet;
+                jackpot += bet;
+            }
+        }
+        if (winSummTemp > 0) {
+            win_summ += winSummTemp;
+            myCoins += myCoinsTemp;
+        }
+        gameDataTemp.setBet(bet);
+        gameDataTemp.setCoins(myCoins);
+        gameDataTemp.setJackpot(jackpot);
 
-// Inflate our custom view
-//        View snackView = mInflater.inflate(R.layout.my_snackbar, null);
-        View snackView= LayoutInflater.from(this).inflate(R.layout.win_dialig, null, false);
-
-// Configure the view
-       TextView summ = snackView.findViewById(R.id.win_summ);
-        String sum = String.valueOf(win_summ);
-        summ.setText(sum);
-
-//        ImageView imageView = (ImageView) snackView.findViewById(R.id.image);
-//        imageView.setImageBitmap(image);
-//        TextView textViewTop = (TextView) snackView.findViewById(R.id.text);
-//        textViewTop.setText(text);
-//        textViewTop.setTextColor(Color.WHITE);
-
-//If the view is not covering the whole snackbar layout, add this line
-        layout.setPadding(0,0,0,0);
-        layout.setBackgroundColor(Color.TRANSPARENT);
-// Add the view to the Snackbar's layout
-        layout.addView(snackView, 0);
-// Show the Snackbar
-        snackbar.show();
+        return checkOtherLineFlag;
     }
+
 
     private int getRandom() {
         Random rand = new Random();
@@ -478,6 +599,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }//btnMinus
 
+
     public void btnPlus(View view) {
         int bet = Integer.parseInt(betField.getText().toString());
         if (bet < 100) {
@@ -488,7 +610,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void btnSettings(View view) {
-    }
+        View uboutUs = getLayoutInflater().inflate(R.layout.about_us, null);
+        new AlertDialog.Builder(this)
+                .setView(uboutUs)
+                .create().show();
+    }//btnSettings
 
 
     private void setFonts() {

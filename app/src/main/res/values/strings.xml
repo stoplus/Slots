@@ -33,9 +33,13 @@
     <string name="my_coins">MY COINS</string>
     <string name="start_bet">5</string>
     <string name="jackpot_sum">100000</string>
+    <string name="version_app">Version 1.0</string>
+    <string name="contact">Contacts: <a href="mailto:stoplus@gmail.com">stoplus@gmail.com</a></string>
 
     <string name="item_string">Item %1$d</string>
     <string name="slot">slot</string>
     <string name="coins_snackbar">coins_snackbar</string>
+    <string name="coins">COINS</string>
+    <string name="sum_lines">0</string>
 
 </resources>
