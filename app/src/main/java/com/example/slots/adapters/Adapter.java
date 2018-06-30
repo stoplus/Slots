@@ -1,6 +1,5 @@
 package com.example.slots.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +14,13 @@ public final class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private final List<Integer> items;
 
 
-    public static Adapter newInstance(Context context, List<Integer> items) {
-        return new Adapter(items);//возвращаем пререданный список
+    public static Adapter newInstance(List<Integer> items) {
+        return new Adapter(items);
     }
 
 
     private Adapter(List<Integer> items) {
-        this.items = items;//присваиваем переданный список список для отображения
+        this.items = items;//assign the transferred list to the list to display
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.slots.entityRoom;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -22,11 +21,8 @@ public interface GameDataDao {
     @Update
     void update(GameData imageObj);
 
-    //обновляем ставку
+    // update bet
     @Query("UPDATE GameData SET bet = :bet WHERE id =:id")
     void updateBet(int bet, int id);
 
-
-    @Delete
-    void delete(GameData... imageObj);
-}
+}//GameDataDao

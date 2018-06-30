@@ -12,55 +12,15 @@ import com.example.slots.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private Runnable hideControls;
-    private Handler threadHandler = new Handler();
-    private int uiOptions;
-    private View decorView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ativity_splash);
 
-//        decorView = getWindow().getDecorView();
-//        uiOptions =   View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-//                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-//        decorView.setSystemUiVisibility(uiOptions);
-//        decorView.setOnSystemUiVisibilityChangeListener
-//                (new View.OnSystemUiVisibilityChangeListener() {
-//                    @Override
-//                    public void onSystemUiVisibilityChange(int visibility) {
-//                        if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-//                            // видно
-//                            threadHandler.postDelayed(hideControls, 1000);
-//                        }
-//                    }
-//                });
-//
-//        hideControls = new Runnable() {
-//            @Override
-//            public void run() {
-//                hideAllControls();
-//            }
-//        };
-
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         new LongOperation().execute();
     }//onCreate
-
-
-//    //
-    private void hideAllControls() {
-        decorView.setSystemUiVisibility(uiOptions);
-    }//hideAllControls
-//
-//
-//    private void showControls() {
-//        decorView.setSystemUiVisibility(View.VISIBLE);
-//        threadHandler.removeCallbacks(hideControls);
-//        threadHandler.postDelayed(hideControls, 3000);
-//    }//showControls
 
 
     private class LongOperation extends AsyncTask<Void, Void, Void> {
@@ -68,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Thread.sleep(10050);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 Thread.interrupted();
             }

@@ -204,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:paddingStart="70dp"
-                    android:text="1200"
+                    android:text="@string/start_coins"
                     android:textColor="@android:color/white"
                     android:textSize="28sp" />
 
@@ -358,7 +358,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/button_small" />
         </android.support.constraint.ConstraintLayout>
-
 
         <Button
             android:id="@+id/button_big"

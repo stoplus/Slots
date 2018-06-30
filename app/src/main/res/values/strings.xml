@@ -41,5 +41,8 @@
     <string name="coins_snackbar">coins_snackbar</string>
     <string name="coins">COINS</string>
     <string name="sum_lines">0</string>
+    <string name="you_won">YOU WON!</string>
+    <string name="_100000">100000</string>
+    <string name="start_coins">1200</string>
 
 </resources>

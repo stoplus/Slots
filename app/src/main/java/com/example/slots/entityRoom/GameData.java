@@ -18,6 +18,7 @@ public class GameData {
     @ColumnInfo(name = "bet")
     private int bet;
 
+
     public GameData(int jackpot, int coins, int bet) {
         this.jackpot = jackpot;
         this.coins = coins;

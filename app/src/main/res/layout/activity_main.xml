@@ -200,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:paddingStart="40dp"
-                    android:text="1200"
+                    android:text="@string/start_coins"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
@@ -286,7 +286,6 @@
             app:layout_constraintStart_toEndOf="@+id/field_lines"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <RelativeLayout
                 android:id="@+id/field_bet"
                 android:layout_width="wrap_content"
@@ -295,7 +294,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
 
                 <ImageView
                     android:id="@+id/field_bet1"

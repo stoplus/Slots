@@ -19,11 +19,11 @@ public class MyApp extends Application {
                 .build();
     }
 
-    public static MyApp app(){
+    public static MyApp app() {
         return app;
     }
 
-    public DataBaseComponent appComponent(){
+    public DataBaseComponent appComponent() {
         return dataBaseComponent;
     }
 }//class MyApp

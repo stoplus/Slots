@@ -21,29 +21,21 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    public Context provideContext(){
+    public Context provideContext() {
         return context;
     }
 
-    @Singleton @Provides
-    public MyDatabase provideMyDatabase(Context context){
+    @Singleton
+    @Provides
+    public MyDatabase provideMyDatabase(Context context) {
         return Room.databaseBuilder(context, MyDatabase.class, "my-db").build();
     }
 
-//    @Singleton @Provides
-//    public CardDao provideCardDao(MyDatabase myDatabase){
-//        return myDatabase.cardDao();
-//    }
-
-    @Singleton @Provides
-    public GameDataDao provideUserDao(MyDatabase myDatabase){
+    @Singleton
+    @Provides
+    public GameDataDao provideUserDao(MyDatabase myDatabase) {
         return myDatabase.gameDataDao();
     }
-
-//    @Singleton @Provides
-//    public HistoryDao provideHistoryDao(MyDatabase myDatabase){
-//        return myDatabase.historyDao();
-//    }
 
 }//DatabaseModule
 

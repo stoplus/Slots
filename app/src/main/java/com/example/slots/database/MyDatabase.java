@@ -10,13 +10,9 @@ import android.support.annotation.NonNull;
 import com.example.slots.entityRoom.GameData;
 import com.example.slots.entityRoom.GameDataDao;
 
-
 @Database(entities = {GameData.class}, version = 1, exportSchema = false)
-//@Database(entities = {Card.class, History.class, GameData.class}, version = 1, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
-//    public abstract CardDao cardDao();
-//    public abstract HistoryDao historyDao();
     public abstract GameDataDao gameDataDao();
 
     @NonNull
